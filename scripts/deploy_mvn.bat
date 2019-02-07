@@ -1,7 +1,7 @@
 @echo off
 echo Creating services...
-cf create-service p-circuit-breaker-dashboard standard traveler-circuit-breaker-dashboard > nul
-cf create-service p-service-registry standard traveler-service-registry > nul
+cf create-service p-circuit-breaker-dashboard trial traveler-circuit-breaker-dashboard > nul
+cf create-service p-service-registry trial traveler-service-registry > nul
 :checkCbd
   cf service traveler-circuit-breaker-dashboard | find "succeeded" > nul
   if errorlevel 1 goto :checkCbd

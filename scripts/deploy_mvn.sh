@@ -1,7 +1,7 @@
 echo -n "Creating services..."
 {
-  cf create-service p-service-registry standard traveler-service-registry
-  cf create-service p-circuit-breaker-dashboard standard traveler-circuit-breaker-dashboard
+  cf create-service p-service-registry trial traveler-service-registry
+  cf create-service p-circuit-breaker-dashboard trial traveler-circuit-breaker-dashboard
 } &> /dev/null
 until [ `cf service traveler-circuit-breaker-dashboard | grep -c "succeeded"` -eq 1  ]
 do
