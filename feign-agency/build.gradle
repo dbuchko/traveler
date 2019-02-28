@@ -4,8 +4,13 @@ buildscript {
     }
     dependencies {
         classpath("io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.3.RELEASE")
     }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'java'
 }
 
 apply plugin: "java"
@@ -17,11 +22,15 @@ jar {
     version = "0.0.1-SNAPSHOT"
 }
 
+ext {
+    set('springCloudServicesVersion', '2.1.0.RELEASE')
+    set('springCloudVersion', 'Greenwich.RELEASE')
+}
+
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.boot:spring-boot-dependencies:2.0.3.RELEASE"
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE"
-        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:2.0.0.RELEASE"
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
 
@@ -30,13 +39,15 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web:2.0.3.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-test")
     compile("org.springframework.cloud:spring-cloud-starter-openfeign")
     compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.cloud:spring-cloud-starter-sleuth")
     compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
     compile("io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker")
 }
