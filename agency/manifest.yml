@@ -1,10 +1,13 @@
 ---
 applications:
   - name: agency
+    host: agency-dlb
     instances: 1
     memory: 1G
+    path: build/libs/agency-0.0.1-SNAPSHOT.jar
     services:
       - traveler-service-registry
       - traveler-circuit-breaker-dashboard
     env:
+      TRUST_CERTS: api.run.pivotal.io
       SPRING_PROFILES_ACTIVE: development

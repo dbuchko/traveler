@@ -2,7 +2,10 @@
 memory: 1G
 applications:
   - name: company
+    host: company-dlb
+    path: build/libs/company-0.0.1-SNAPSHOT.jar
     services:
       - traveler-service-registry
     env:
+      TRUST_CERTS: api.run.pivotal.io
       SPRING_PROFILES_ACTIVE: development
